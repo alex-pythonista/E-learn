@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title_block %} Login {% endblock %}
+{% block css_block %}
+<style>
+    .login {
+        width: 425px;
+        border: 1px solid #ccc;
+        padding: 40px;
+    }
+    .sign-up {
+        width: 425px;
+        border: 1px solid #ccc;
+        padding: 40px;
+    }
+</style>
+{% endblock %}
+{% block body_block %}
+{% if teacher %}
+<center><h2>Instructor Login</h2><br></center>
+{% else %}
+<center><h2>Student Login</h2><br></center>
+{% endif %}
+<center>
+    <div class="form-container">
+        <div class="row">
+            <div class="col">
+                {% if teacher %}
+                <div class="login">
+                    <h4>Login here &nbsp; <a href="{% url 'login_app:startpage' %}">Home</a></h4><br>
+                    <form action="" method="POST">
+                        {{login_form|crispy}}
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary btn-sm">login</button>
+                    </form>
+                </div>
+                <div class="sign-up my-3">
+                    <p>Want to contribute? <a href="{% url 'login_app:instructor_sign_up' %}">Sign up here</a></p>
+                </div>
+                {% else %}
+                <div class="login">
+                    <h4>Login here &nbsp; <a href="{% url 'login_app:startpage' %}">Home</a></h4><br>
+                    <form action="" method="POST">
+                        {{login_form|crispy}}
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary btn-sm">login</button>
+                    </form>
+                </div>
+                <div class="sign-up my-3">
+                    <p>Join Today! <a href="{% url 'login_app:student_sign_up' %}">Sign up here</a></p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</center>
+{% endblock %}

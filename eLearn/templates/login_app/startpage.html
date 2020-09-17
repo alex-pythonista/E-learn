@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title_block %} Welcome {% endblock %}
+{% block css_block %} {% endblock %}
+{% block body_block %}
+
+<center>
+<div class="content">
+    <h3>Welcome to eLearn. The largest community to learn online!</h3>
+    <p style="font-size: 20px;">Enter as an:</p>
+    <a href="{% url 'login_app:instructor_login' %}" class="btn btn-primary btn-lg">Instructor</a> or <a href="{% url 'login_app:student_login' %}" class="btn btn-success btn-lg">Student</a>
+</div>
+</center>
+{% endblock %}

@@ -8,43 +8,37 @@
         border: 1px solid #ccc;
         padding: 40px;
     }
-
-    .login {
-        width: 425px;
-        border: 1px solid #ccc;
-        padding: 40px;
-    }
 </style>
 {% endblock %}
 {% block body_block %}
+{% if teacher %}
+<center><h2>Enter as an Instructor</h2><br></center>
+{% else %}
+<center><h2>Enter as a Student</h2><br></center>
+{% endif %}
 <center>
     <div class="form-container">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col">
+                {% if teacher %}
                 <div class="sign-up">
-                    <h4>Sign up as a Teacher</h4><br>
+                    <h4>Instrcutor sign up &nbsp; <a href="{% url 'login_app:startpage' %}">Home</a></h4><br>
                     <form action="" method="POST">
-                        {{teacher_form|crispy}}
+                        {{signup_form|crispy}}
                         {% csrf_token %}
                         <button type="submit" class="btn btn-primary btn-sm">sign up</button>
                     </form>
                 </div>
-                <div class="login my-3">
-                    <p>Have a teacher account? <a href="#">Login here</a></p>
-                </div>
-            </div>
-            <div class="col-sm-6">
+                {% else %}
                 <div class="sign-up">
-                    <h4>Sign up as a Student</h4><br>
+                    <h4>Student sign up &nbsp; <a href="{% url 'login_app:startpage' %}">Home</a></h4><br>
                     <form action="" method="POST">
-                        {{student_form|crispy}}
+                        {{signup_form|crispy}}
                         {% csrf_token %}
                         <button type="submit" class="btn btn-primary btn-sm">sign up</button>
                     </form>
                 </div>
-                <div class="login my-3">
-                    <p>Have a student account? <a href="#">Login here</a></p>
-                </div>
+                {% endif %}
             </div>
         </div>
     </div>
