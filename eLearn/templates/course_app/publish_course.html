@@ -1,0 +1,34 @@
+{% extends 'navbar.html' %}
+{% load crispy_forms_tags %}
+{% block title_block %} 
+{% if edit %}
+    Edit course
+    {% else %}
+    Publish course
+    {% endif %}
+{% endblock %}
+{% block css_block %}
+<style>
+    .upload-course{
+        width: 725px;
+        border: 1px solid #ccc;
+        padding: 40px;
+    }
+</style>
+{% endblock %}
+{% block body_block %}
+
+<div class='upload-course'>
+    {% if edit %}
+    <h5>Edit your video</h5>
+    {% else %}
+    <h5>Upload your content</h5>
+    {% endif %}
+    <form method="POST" enctype="multipart/form-data">
+      {{ form|crispy}}
+      {% csrf_token %}
+      <button type="submit" style="width:100%" class="btn btn-success btn-sm">Shoot</button>
+    </form>
+  </div>
+
+{% endblock %}

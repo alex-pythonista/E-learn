@@ -1,0 +1,41 @@
+{% extends 'navbar.html' %}
+{% load crispy_forms_tags %}
+{%block title_block %} Home {%endblock%}
+{% block css_block %} {% endblock %}
+{% block body_block %}
+
+<center><h2>{{course.course_title}}</h2></center>
+<div class="row py-5">
+    <div class="col-sm-6">
+        <video src="/media/{{course.video_lecture}}" controls width="725px">video lecture</video>
+    </div>
+</div>
+<center><h3>Related Article</h3></center>
+<div class="row">
+    <p>{{course.article}}</p>
+</div>
+<center><h3>Quiz</h3></center>
+<div class="row">
+    <a href="{{course.quiz}}">Click here</a> to take part to the quiz!
+</div>
+<center><h3>Discussion Forum</h3></center>
+<div class="comments">
+    <div class="row">
+        <div class="col-sm-5 py-5">
+            <h4>Comments:</h4>
+            {% for comment in course.course_comment.all %}
+            <p><strong>@{{comment.user.username}}</strong> &nbsp; {{comment}}</p>
+            {% endfor %}
+        </div>
+        <div class="col-sm-7 py-5">
+            <form action="" method="POST">
+                {{form|crispy}}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary btn-sm">Comment</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

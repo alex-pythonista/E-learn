@@ -10,6 +10,8 @@
         {% if user.student_profile.profile_picture %}
         <img src="/media/{{user.student_profile.profile_picture}}" alt="" width="250px" height="250px"
             class="rounded-circle">
+        {% elif user.instructor_profile.profile_picture %}
+        <img src="/media/{{user.instructor_profile.profile_picture}}" width="250px" height="250px" class="rounded-circle" alt="default">
         {% else %}
         <img src="/static/images/unisex_avatar.jpg" width="250px" height="250px" class="rounded-circle" alt="default">
         {% endif %}
@@ -31,6 +33,7 @@
         <a href="{% url 'login_app:edit_student' %}" class="btn btn-info btn-sm">Edit student</a>
         {% else %}
         <a href="{% url 'login_app:edit_instructor' %}" class="btn btn-info btn-sm">Edit instructor</a>
+        <a href="{% url 'course_app:publish_course' %}" class="btn btn-primary btn-sm">Publish a course</a>
         {% endif %}
     </div>
 </div><hr>
