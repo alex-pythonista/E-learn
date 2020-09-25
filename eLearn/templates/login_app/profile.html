@@ -37,4 +37,15 @@
         {% endif %}
     </div>
 </div><hr>
+<div class="row">
+    {% if user.student_profile %} 
+    {% for course in Enrol.enrolled_course.all %}
+    <div class="col">
+        <a href="#"><img src="/media/{{course.image}}" alt="" width="100px" height="100px">
+        <Strong>{{course.course_title}}</Strong> </a><p>Published by: 
+        <img src="/media/{{course.instructor.profile_picture}}" alt="" width="23px" height="23px" class="rounded-circle">{{course.instructor}} </p>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
 {% endblock %}

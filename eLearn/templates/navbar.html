@@ -32,7 +32,7 @@
           <li class="nav-item">
             {% if user.instructor_profile.profile_picture %}
             <a class="nav-link" href="{% url 'login_app:profile' %}"><img src="/media/{{user.instructor_profile.profile_picture}}" alt="" width="23px" height="23px" class="rounded-circle">{{user.username}}</a>
-            {% elif user.instructor_profile.profile_picture %}
+            {% elif user.student_profile.profile_picture %}
             <a class="nav-link" href="{% url 'login_app:profile' %}"><img src="/media/{{user.student_profile.profile_picture}}" alt="" width="23px" height="23px" class="rounded-circle">{{user.username}}</a>
             {% else %}
             <a class="nav-link" href="{% url 'login_app:profile' %}"><img src="/static/images/unisex_avatar.jpg" width="23px" height="23px" class="rounded-circle" alt="default">{{user.username}}</a>

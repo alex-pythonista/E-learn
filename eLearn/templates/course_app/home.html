@@ -15,6 +15,7 @@
 {% for video in result %}
 <p><a href="{% url 'stream_app:video_details' slug=video.slug %}">{{video.video_title}}</a></p>
 {% endfor %}
+
 {% else %}
 <div class="course-list">
     <div class="row">

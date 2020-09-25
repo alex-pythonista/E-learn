@@ -4,6 +4,7 @@
 {% block css_block %} {% endblock %}
 {% block body_block %}
 
+{% if enrolled %}
 <center><h2>{{course.course_title}}</h2></center>
 <div class="row py-5">
     <div class="col-sm-6">
@@ -37,5 +38,9 @@
     </div>
 </div>
 
+{% else %}
 
+<h4>To see course materials, <a href="{% url 'course_app:enrol' slug=course.slug %}" class="btn btn-primary btn-sm">enrol</a></h4>
+
+{% endif %}
 {% endblock %}

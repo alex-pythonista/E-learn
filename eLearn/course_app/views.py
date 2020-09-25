@@ -6,16 +6,15 @@ from django.urls import reverse
 # project imports
 from .forms import PublishCourse, CommentForm
 import uuid
-from .models import Course
-from login_app.models import Instructor
+from .models import Course, Enrol
+from login_app.models import Instructor, Student
 
 # Create your views here.
 
 @login_required
 def home(request):
     courses = Course.objects.all()
-    
-    return render(request, 'course_app/home.html', {'courses': courses})
+    return render(request, 'course_app/home.html', {'courses': courses,})
 
 @login_required
 def publish_course(request):
@@ -35,6 +34,8 @@ def publish_course(request):
 @login_required
 def course_details(request, slug):
     course = Course.objects.get(slug=slug)
+    student = Student.objects.get(user=request.user)
+    already_enrolled = Enrol.objects.filter(student=student, course=course)
     comment_form = CommentForm()
     if request.method == 'POST':
         comment_form = CommentForm(data=request.POST)
@@ -45,4 +46,14 @@ def course_details(request, slug):
             comment.save()
             return HttpResponseRedirect(reverse('course_app:details', kwargs={'slug': slug}))
 
-    return render(request, 'course_app/course_details.html', {'course': course, 'form': comment_form})
+    return render(request, 'course_app/course_details.html', {'course': course, 'form': comment_form, 'enrolled': already_enrolled})
+
+@login_required
+def enrol_course(request, slug):
+    student = Student.objects.get(user=request.user)
+    course = Course.objects.get(slug=slug)
+    already_enrolled = Enrol.objects.filter(student=student, course=course)
+    if not already_enrolled:
+        enrolled = Enrol(student=student, course=course)
+        enrolled.save()
+    return HttpResponseRedirect(reverse('course_app:details', kwargs={'slug': slug}))
