@@ -1,5 +1,0 @@
-django==2.2.5
-django-crispy-forms
-django-cleanup
-mysqlclient
-pillow
