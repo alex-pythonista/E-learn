@@ -1,0 +1,4 @@
+django==2.2.5
+pillow
+django-cleanup
+django-crispy-forms
