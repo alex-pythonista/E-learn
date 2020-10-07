@@ -18,7 +18,7 @@
             <strong>Subject: </strong>{{user.teacher_profile.subject}} <br>
             <p class="text-muted">{{user.teacher_profile.job_title}}</p><br>
             <a href="{% url 'app_login:edit_teacher' %}" class="btn btn-info btn-sm">Edit profile</a>&nbsp;
-            <a href="" class="btn btn-secondary btn-sm">Publish a course</a>
+            <a href="{% url 'app_course:publish' %}" class="btn btn-secondary btn-sm">Publish a course</a>
         </p>
         {% else %}
         <p>

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title_block %} {{course.course_title}} {% endblock %}
+{% block body_block %}
+
+<h3 class="text-center p-5">{{course.course_title}}</h3>
+<div class="row">
+    <div class="col-sm-6">
+        <strong>Instructor: </strong>@{{course.teacher}} <br>
+        <strong>Published on: </strong>{{course.publish_date}} <br>
+        <strong>Updated on: </strong>{{course.update_date}}
+    </div>
+    <div class="col">
+        <img src="/media/{{course.course_poster}}" alt="course_poster" width="100%" height="300px">
+    </div>
+</div>
+<p>{{course.course_article|linebreaks}}</p><br>
+<h3>Practice quiz</h3>
+<iframe src="{{course.quiz_url}}" frameborder="0" width="800px" height="1000px"></iframe>
+
+<hr>
+Questions | {{course.course_question.count}} 
+<div class="row">
+    <div class="col-sm-6">
+        <h5>Questions</h5>
+        {% for question in course.course_question.all %}
+        <p>
+            @{{question.user}} <br>
+            <a href="{% url 'app_course:question' pk=question.pk %}">{{question}}</a>
+        </p>
+        {% endfor %}
+    </div>
+    {% if not user.teacher_profile %}
+    <div class="col-sm-6">
+        <form action="" method="POST">
+            {{form|crispy}}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-info btn-sm">Ask</button>
+        </form>
+    </div>
+    {% endif %}
+</div>
+
+
+{% endblock %}

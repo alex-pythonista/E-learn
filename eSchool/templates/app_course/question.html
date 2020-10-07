@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title_block %} {{question}} {% endblock %}
+{% block body_block %}
+
+<h2 class="text-center">Support Forum</h2>
+
+<h3>Q: {{question}} </h3>
+{{question.q_reply.count}} replied
+<div class="row">
+    <div class="col-sm-6">
+        <h5>Replies</h5>
+        {% for reply in question.q_reply.all %}
+        <p>
+            @{{reply.user}} <br>
+            {{reply}}
+        </p>
+        {% endfor %}
+    </div>
+    <div class="col-sm-6">
+        <form action="" method="POST">
+            {{form|crispy}}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-info btn-sm">Reply</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

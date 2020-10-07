@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title_block %} Home {% endblock %}
+{% block body_block %}
+
+<h2 class="text-center">Welcome to eSchool</h2>
+{% for course in course_list %}
+<div class="row pt-3">
+    <div class="col">
+        <img src="/media/{{course.course_poster}}" alt="cours_image" width="33px" height="33px" class="rounded-circle">
+        <h4><a href="{% url 'app_course:course_details' slug=course.slug %}">{{course.course_title}}</a></h4>
+        <small class="text-muted">Instructor: @{{course.teacher}}</small>&nbsp;
+        <small class="text-muted">Published on: {{course.publish_date}}</small>
+    </div>
+</div>
+<hr>
+{% endfor %}
+{% endblock %}
